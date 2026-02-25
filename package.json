@@ -1,0 +1,14 @@
+{
+  "name": "inventory-app",
+  "version": "1.0.0",
+  "description": "Retail store inventory management web app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node tests/api.test.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
