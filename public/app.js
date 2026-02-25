@@ -1,6 +1,7 @@
 /* global state */
 let currentEditId = null;
 let currentDeleteId = null;
+let groupByCategory = false;
 
 /* ============================
    Utility: Toast
@@ -55,6 +56,11 @@ function renderTable(products) {
   tableWrapper.classList.remove('hidden');
   empty.classList.add('hidden');
 
+  if (groupByCategory) {
+    renderGrouped(products, tbody);
+    return;
+  }
+
   tbody.innerHTML = products.map(p => {
     const status = stockStatus(p.quantity);
     return `
@@ -73,6 +79,45 @@ function renderTable(products) {
         </td>
       </tr>`;
   }).join('');
+}
+
+function renderGrouped(products, tbody) {
+  const grouped = {};
+  products.forEach(p => {
+    if (!grouped[p.category]) grouped[p.category] = [];
+    grouped[p.category].push(p);
+  });
+
+  const categories = Object.keys(grouped).sort();
+  let html = '';
+  categories.forEach(cat => {
+    const count = grouped[cat].length;
+    html += `<tr class="category-group-header">
+      <td colspan="7">
+        <span class="category-group-icon">📂</span>
+        <span class="category-group-name">${escHtml(cat)}</span>
+        <span class="category-group-count">${count} item${count !== 1 ? 's' : ''}</span>
+      </td>
+    </tr>`;
+    grouped[cat].forEach(p => {
+      const status = stockStatus(p.quantity);
+      html += `<tr>
+        <td class="td-sku">${escHtml(p.sku)}</td>
+        <td class="td-name">${escHtml(p.name)}</td>
+        <td><span class="category-badge">${escHtml(p.category)}</span></td>
+        <td class="td-price">${fmtPrice(p.price)}</td>
+        <td class="td-qty">${p.quantity}</td>
+        <td><span class="status-badge ${status.cls}">${status.dot} ${status.label}</span></td>
+        <td>
+          <div class="actions-cell">
+            <button class="btn btn-icon btn-edit" onclick="openEditModal(${p.id}, ${p.quantity}, '${escHtml(p.name).replace(/'/g, "\\'")}')">✏️ Edit Qty</button>
+            <button class="btn btn-icon btn-del" onclick="openDeleteModal(${p.id}, '${escHtml(p.name).replace(/'/g, "\\'")}')">🗑️ Delete</button>
+          </div>
+        </td>
+      </tr>`;
+    });
+  });
+  tbody.innerHTML = html;
 }
 
 function updateHeaderStats(products) {
@@ -271,6 +316,18 @@ document.getElementById('confirmDelete').addEventListener('click', async () => {
     loadCategories_refresh();
     loadProducts();
   }
+});
+
+/* ============================
+   Group by Category Toggle
+   ============================ */
+document.getElementById('groupByCatBtn').addEventListener('click', () => {
+  groupByCategory = !groupByCategory;
+  const btn = document.getElementById('groupByCatBtn');
+  btn.textContent = groupByCategory ? '📋 Flat List' : '📂 Group by Category';
+  btn.classList.toggle('btn-primary', groupByCategory);
+  btn.classList.toggle('btn-secondary', !groupByCategory);
+  loadProducts();
 });
 
 /* ============================
