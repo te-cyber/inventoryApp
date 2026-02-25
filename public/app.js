@@ -2,6 +2,8 @@
 let currentEditId = null;
 let currentDeleteId = null;
 let groupByCategory = false;
+let sortColumn = null;
+let sortDir = 'asc';
 
 /* ============================
    Utility: Toast
@@ -27,6 +29,47 @@ function stockStatus(qty) {
 }
 
 /* ============================
+   Sorting
+   ============================ */
+function sortProducts(products) {
+  if (!sortColumn) return products;
+  const col = sortColumn === 'status' ? 'quantity' : sortColumn;
+  return [...products].sort((a, b) => {
+    let av = a[col];
+    let bv = b[col];
+    if (typeof av === 'string') av = av.toLowerCase();
+    if (typeof bv === 'string') bv = bv.toLowerCase();
+    if (av < bv) return sortDir === 'asc' ? -1 : 1;
+    if (av > bv) return sortDir === 'asc' ? 1 : -1;
+    return 0;
+  });
+}
+
+function sortBy(col) {
+  if (sortColumn === col) {
+    sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortColumn = col;
+    sortDir = 'asc';
+  }
+  loadProducts();
+}
+
+function updateSortHeaders() {
+  ['sku', 'name', 'category', 'price', 'quantity', 'status'].forEach(col => {
+    const el = document.getElementById('sort-' + col);
+    if (!el) return;
+    if (sortColumn === col) {
+      el.textContent = sortDir === 'asc' ? '▲' : '▼';
+      el.closest('th').classList.add('th-sorted');
+    } else {
+      el.textContent = '⇅';
+      el.closest('th').classList.remove('th-sorted');
+    }
+  });
+}
+
+/* ============================
    Load & Render Products
    ============================ */
 async function loadProducts() {
@@ -47,6 +90,8 @@ function renderTable(products) {
   const empty = document.getElementById('emptyState');
   const tableWrapper = document.getElementById('tableWrapper');
 
+  updateSortHeaders();
+
   if (products.length === 0) {
     tableWrapper.classList.add('hidden');
     empty.classList.remove('hidden');
@@ -56,12 +101,14 @@ function renderTable(products) {
   tableWrapper.classList.remove('hidden');
   empty.classList.add('hidden');
 
+  const sorted = sortProducts(products);
+
   if (groupByCategory) {
-    renderGrouped(products, tbody);
+    renderGrouped(sorted, tbody);
     return;
   }
 
-  tbody.innerHTML = products.map(p => {
+  tbody.innerHTML = sorted.map(p => {
     const status = stockStatus(p.quantity);
     return `
       <tr>

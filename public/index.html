@@ -69,12 +69,12 @@
         <table id="productsTable">
           <thead>
             <tr>
-              <th>SKU</th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Status</th>
+              <th class="sortable" onclick="sortBy('sku')">SKU <span class="sort-icon" id="sort-sku">⇅</span></th>
+              <th class="sortable" onclick="sortBy('name')">Name <span class="sort-icon" id="sort-name">⇅</span></th>
+              <th class="sortable" onclick="sortBy('category')">Category <span class="sort-icon" id="sort-category">⇅</span></th>
+              <th class="sortable" onclick="sortBy('price')">Price <span class="sort-icon" id="sort-price">⇅</span></th>
+              <th class="sortable" onclick="sortBy('quantity')">Quantity <span class="sort-icon" id="sort-quantity">⇅</span></th>
+              <th class="sortable" onclick="sortBy('status')">Status <span class="sort-icon" id="sort-status">⇅</span></th>
               <th>Actions</th>
             </tr>
           </thead>
