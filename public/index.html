@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">📦</span>
+        <span class="logo-text">Inventory Manager</span>
+      </div>
+      <div class="header-stats" id="headerStats"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Controls -->
+    <section class="controls">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search by name or SKU…" />
+      </div>
+      <select id="categoryFilter">
+        <option value="All">All Categories</option>
+      </select>
+      <button class="btn btn-primary" id="addProductBtn">＋ Add Product</button>
+    </section>
+
+    <!-- Products Table -->
+    <section class="table-section">
+      <div id="tableWrapper">
+        <table id="productsTable">
+          <thead>
+            <tr>
+              <th>SKU</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productsBody"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="empty-state hidden">
+        <span class="empty-icon">🔍</span>
+        <p>No products found.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add Product Modal -->
+  <div id="addModal" class="modal hidden">
+    <div class="modal-overlay" id="addModalOverlay"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Add New Product</h2>
+        <button class="modal-close" id="closeAddModal">✕</button>
+      </div>
+      <form id="addProductForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="newName">Product Name *</label>
+            <input type="text" id="newName" placeholder="e.g. Wireless Mouse" required />
+          </div>
+          <div class="form-group">
+            <label for="newSku">SKU *</label>
+            <input type="text" id="newSku" placeholder="e.g. ELEC-007" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="newCategory">Category *</label>
+            <input type="text" id="newCategory" placeholder="e.g. Electronics" list="categoryOptions" required />
+            <datalist id="categoryOptions"></datalist>
+          </div>
+          <div class="form-group">
+            <label for="newPrice">Price ($) *</label>
+            <input type="number" id="newPrice" placeholder="0.00" min="0" step="0.01" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="newQuantity">Quantity *</label>
+            <input type="number" id="newQuantity" placeholder="0" min="0" required />
+          </div>
+        </div>
+        <div id="addError" class="form-error hidden"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelAddModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Quantity Modal -->
+  <div id="editModal" class="modal hidden">
+    <div class="modal-overlay" id="editModalOverlay"></div>
+    <div class="modal-box modal-box-sm">
+      <div class="modal-header">
+        <h2>Update Quantity</h2>
+        <button class="modal-close" id="closeEditModal">✕</button>
+      </div>
+      <div class="edit-product-name" id="editProductName"></div>
+      <form id="editQuantityForm">
+        <div class="form-group">
+          <label for="editQuantity">New Quantity</label>
+          <div class="quantity-control">
+            <button type="button" class="qty-btn" id="qtyMinus">−</button>
+            <input type="number" id="editQuantity" min="0" required />
+            <button type="button" class="qty-btn" id="qtyPlus">＋</button>
+          </div>
+        </div>
+        <div id="editError" class="form-error hidden"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelEditModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal hidden">
+    <div class="modal-overlay" id="deleteModalOverlay"></div>
+    <div class="modal-box modal-box-sm">
+      <div class="modal-header">
+        <h2>Delete Product</h2>
+        <button class="modal-close" id="closeDeleteModal">✕</button>
+      </div>
+      <p class="delete-confirm-text">Are you sure you want to delete <strong id="deleteProductName"></strong>? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="cancelDeleteModal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

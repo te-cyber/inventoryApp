@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Mouse",
+    "category": "Electronics",
+    "sku": "ELEC-001",
+    "price": 29.99,
+    "quantity": 45
+  },
+  {
+    "id": 2,
+    "name": "Mechanical Keyboard",
+    "category": "Electronics",
+    "sku": "ELEC-002",
+    "price": 89.99,
+    "quantity": 30
+  },
+  {
+    "id": 3,
+    "name": "USB-C Hub",
+    "category": "Electronics",
+    "sku": "ELEC-003",
+    "price": 49.99,
+    "quantity": 60
+  },
+  {
+    "id": 4,
+    "name": "Monitor Stand",
+    "category": "Office Supplies",
+    "sku": "OFFC-001",
+    "price": 34.99,
+    "quantity": 25
+  },
+  {
+    "id": 5,
+    "name": "Notebook (A5)",
+    "category": "Stationery",
+    "sku": "STAT-001",
+    "price": 4.99,
+    "quantity": 200
+  },
+  {
+    "id": 6,
+    "name": "Ballpoint Pens (12-pack)",
+    "category": "Stationery",
+    "sku": "STAT-002",
+    "price": 7.99,
+    "quantity": 150
+  },
+  {
+    "id": 7,
+    "name": "Desk Lamp",
+    "category": "Office Supplies",
+    "sku": "OFFC-002",
+    "price": 24.99,
+    "quantity": 40
+  },
+  {
+    "id": 8,
+    "name": "Stapler",
+    "category": "Office Supplies",
+    "sku": "OFFC-003",
+    "price": 12.99,
+    "quantity": 35
+  },
+  {
+    "id": 9,
+    "name": "Printer Paper (500 sheets)",
+    "category": "Office Supplies",
+    "sku": "OFFC-004",
+    "price": 9.99,
+    "quantity": 100
+  },
+  {
+    "id": 10,
+    "name": "Hand Sanitizer (500ml)",
+    "category": "Health & Safety",
+    "sku": "HLTH-001",
+    "price": 5.99,
+    "quantity": 80
+  },
+  {
+    "id": 11,
+    "name": "Face Masks (50-pack)",
+    "category": "Health & Safety",
+    "sku": "HLTH-002",
+    "price": 14.99,
+    "quantity": 120
+  },
+  {
+    "id": 12,
+    "name": "Water Bottle (1L)",
+    "category": "Kitchen",
+    "sku": "KTCH-001",
+    "price": 19.99,
+    "quantity": 55
+  },
+  {
+    "id": 13,
+    "name": "Coffee Mug",
+    "category": "Kitchen",
+    "sku": "KTCH-002",
+    "price": 11.99,
+    "quantity": 70
+  },
+  {
+    "id": 14,
+    "name": "Backpack",
+    "category": "Bags",
+    "sku": "BAGS-001",
+    "price": 59.99,
+    "quantity": 20
+  },
+  {
+    "id": 15,
+    "name": "Tote Bag",
+    "category": "Bags",
+    "sku": "BAGS-002",
+    "price": 14.99,
+    "quantity": 90
+  },
+  {
+    "id": 16,
+    "name": "Webcam HD 1080p",
+    "category": "Electronics",
+    "sku": "ELEC-004",
+    "price": 69.99,
+    "quantity": 18
+  },
+  {
+    "id": 17,
+    "name": "Sticky Notes (5-pack)",
+    "category": "Stationery",
+    "sku": "STAT-003",
+    "price": 6.49,
+    "quantity": 180
+  },
+  {
+    "id": 18,
+    "name": "Scissors",
+    "category": "Office Supplies",
+    "sku": "OFFC-005",
+    "price": 8.99,
+    "quantity": 50
+  },
+  {
+    "id": 19,
+    "name": "Headphones",
+    "category": "Electronics",
+    "sku": "ELEC-005",
+    "price": 79.99,
+    "quantity": 22
+  },
+  {
+    "id": 20,
+    "name": "Extension Cord (3m)",
+    "category": "Electronics",
+    "sku": "ELEC-006",
+    "price": 15.99,
+    "quantity": 38
+  }
+]
