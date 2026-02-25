@@ -79,11 +79,21 @@ function updateHeaderStats(products) {
   const total = products.length;
   const outOfStock = products.filter(p => p.quantity === 0).length;
   const lowStock = products.filter(p => p.quantity > 0 && p.quantity <= 10).length;
+  const inStock = products.filter(p => p.quantity > 10).length;
   document.getElementById('headerStats').innerHTML = `
     <div class="stat-item"><span class="stat-label">Products:</span><span class="stat-value">${total}</span></div>
     <div class="stat-item"><span class="stat-label">Low Stock:</span><span class="stat-value">${lowStock}</span></div>
     <div class="stat-item"><span class="stat-label">Out of Stock:</span><span class="stat-value">${outOfStock}</span></div>
   `;
+  // Update stat cards
+  const cardTotal = document.getElementById('cardTotal');
+  const cardInStock = document.getElementById('cardInStock');
+  const cardLow = document.getElementById('cardLow');
+  const cardOut = document.getElementById('cardOut');
+  if (cardTotal) cardTotal.textContent = total;
+  if (cardInStock) cardInStock.textContent = inStock;
+  if (cardLow) cardLow.textContent = lowStock;
+  if (cardOut) cardOut.textContent = outOfStock;
 }
 
 function escHtml(s) {
