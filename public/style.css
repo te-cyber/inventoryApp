@@ -320,6 +320,32 @@ thead th {
   white-space: nowrap;
 }
 
+thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+thead th.sortable:hover {
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+}
+
+thead th.th-sorted {
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+  color: #4338ca;
+}
+
+.sort-icon {
+  display: inline-block;
+  font-size: .65rem;
+  margin-left: 4px;
+  opacity: .6;
+  vertical-align: middle;
+}
+
+thead th.th-sorted .sort-icon {
+  opacity: 1;
+}
+
 tbody tr {
   border-bottom: 1px solid var(--border);
   transition: background .15s, transform .15s;
